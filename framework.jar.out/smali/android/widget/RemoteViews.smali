@@ -1607,16 +1607,6 @@
     goto :goto_0
 .end method
 
- .method private prepareContext(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Context;
-     .locals 6
-     .param p1, "context"    # Landroid/content/Context;
-@Zoldyck07
-Markdown supported
-Edit in fullscreen
-Write Preview
-
-Attach images by dragging & dropping or selecting them.
-
 .method private prepareContext(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Context;
     .locals 6
     .param p1, "context"    # Landroid/content/Context;

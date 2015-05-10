@@ -3354,8 +3354,6 @@
 .end method
 
 
-.method public patternToString(Ljava/util/List;)Ljava/lang/String;
-
 .method public static patternToString(Ljava/util/List;)Ljava/lang/String;
 
     .locals 6
@@ -4855,10 +4853,6 @@
     return-void
 .end method
 
-
-.method public stringToPattern(Ljava/lang/String;)Ljava/util/List;
-    .locals 7
-    .param p1, "string"    # Ljava/lang/String;
 
 .method public static stringToPattern(Ljava/lang/String;)Ljava/util/List;
     .locals 8

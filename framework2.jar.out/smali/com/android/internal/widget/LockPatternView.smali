@@ -3774,8 +3774,6 @@
 
 .method protected onRestoreInstanceState(Landroid/os/Parcelable;)V
 
-    .locals 4
-
     .locals 3
 
     .param p1, "state"    # Landroid/os/Parcelable;

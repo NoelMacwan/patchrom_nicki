@@ -60,9 +60,6 @@
 
     return-void
 .end method
-
-     return-void
- .end method
  
 .method public constructor <init>(IIJJI)V
     .locals 0
