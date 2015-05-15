@@ -21,18 +21,17 @@ local-miui-removed-apps :=
 
 local-miui-modified-apps := MiuiFramework
 
-local-phone-apps := Camera2 Bluetooth HTMLViewer KeyChain LatinIME Nfc PacProcessor \
-        UserDictionaryProvider WAPPushManager
-
-local-phone-priv-apps := BackupRestoreConfirmation DefaultContainerService FusedLocation \
-        ExternalStorageProvider InputDevices OneTimeInitializer ProxyHandler SharedStorageBackup \
-        Shell Tag VpnDialogs
-
+local-miui-removed-priv-apps := 
 
 # Config density for co-developers to use the aaps with HDPI or XHDPI resource,
 # Default configrations are HDPI for ics branch and XHDPI for jellybean branch
 
 local-density := HDPI
+
+# All apps need to be removed from original ZIP file
+#local-remove-apps   
+
+include phoneapps.mk
 
 # To include the local targets before and after zip the final ZIP file, 
 # and the local-targets should:
@@ -57,7 +56,7 @@ local-pre-zip-misc:
 
 	cp -rf other/system $(ZIP_DIR)/
 
-@echo goodbye! miui prebuilt binaries!
+	@echo goodbye! miui prebuilt binaries!
 	cp -rf stockrom/system/bin/app_process $(ZIP_DIR)/system/bin/app_process
 	rm -rf $(ZIP_DIR)/system/bin/debuggerd_vendor
 	cp -rf stockrom/system/bin/debuggerd $(ZIP_DIR)/system/bin/debuggerd
