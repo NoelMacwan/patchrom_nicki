@@ -5951,7 +5951,17 @@
     .locals 6
 
     .prologue
-    .line 283
+    iget-object v3, p0, Landroid/net/wifi/WifiConfigStore;->mWifiAutoConnController:Landroid/net/wifi/WifiAutoConnController;
+
+    invoke-virtual {v3}, Landroid/net/wifi/WifiAutoConnController;->shouldEnableAllNetworks()Z
+
+    move-result v3
+
+    if-nez v3, :cond_miui_0
+
+    return-void
+
+    :cond_miui_0
     iget-object v3, p0, Landroid/net/wifi/WifiConfigStore;->mContext:Landroid/content/Context;
 
     invoke-virtual {v3}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;

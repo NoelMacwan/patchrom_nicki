@@ -6151,7 +6151,7 @@
 
     move-result v2
 
-    if-eqz v2, :cond_0
+    if-eqz v2, :cond_2
 
     .line 2303
     iget-object v2, p0, Landroid/net/wifi/WifiStateMachine;->mWifiInfo:Landroid/net/wifi/WifiInfo;
@@ -6164,17 +6164,17 @@
     :goto_0
     sget-object v2, Landroid/net/wifi/SupplicantState;->ASSOCIATING:Landroid/net/wifi/SupplicantState;
 
-    if-eq v0, v2, :cond_miui_0
+    if-eq v0, v2, :cond_0
 
     sget-object v2, Landroid/net/wifi/SupplicantState;->ASSOCIATED:Landroid/net/wifi/SupplicantState;
 
-    if-eq v0, v2, :cond_miui_0
+    if-eq v0, v2, :cond_0
 
     sget-object v2, Landroid/net/wifi/SupplicantState;->FOUR_WAY_HANDSHAKE:Landroid/net/wifi/SupplicantState;
 
-    if-ne v0, v2, :cond_miui_1
+    if-ne v0, v2, :cond_1
 
-    :cond_miui_0
+    :cond_0
     iget-object v2, p0, Landroid/net/wifi/WifiStateMachine;->mWifiInfo:Landroid/net/wifi/WifiInfo;
 
     iget-object v3, v1, Landroid/net/wifi/StateChangeResult;->BSSID:Ljava/lang/String;
@@ -6185,7 +6185,7 @@
 
     invoke-static {v2}, Landroid/net/NetworkUtils;->enableInterface(Ljava/lang/String;)I
 
-    :cond_miui_1
+    :cond_1
     iget-object v2, p0, Landroid/net/wifi/WifiStateMachine;->mWifiInfo:Landroid/net/wifi/WifiInfo;
 
     iget-object v3, v1, Landroid/net/wifi/StateChangeResult;->wifiSsid:Landroid/net/wifi/WifiSsid;
@@ -6204,7 +6204,7 @@
     return-object v0
 
     .line 2305
-    :cond_0
+    :cond_2
     iget-object v2, p0, Landroid/net/wifi/WifiStateMachine;->mWifiInfo:Landroid/net/wifi/WifiInfo;
 
     const/4 v3, -0x1
@@ -8503,7 +8503,7 @@
 .end method
 
 .method private setScanResults()V
-    .locals 33
+    .locals 41
 
     .prologue
     .line 1946
@@ -8541,6 +8541,12 @@
 
     .line 1958
     .local v26, "sid":I
+    const/16 v33, 0x0
+
+    .local v33, "isWpsConfigured":Z
+    const/16 v34, 0x0
+
+    .local v34, "isXiaomiRouter":Z
     :cond_0
     move-object/from16 v0, p0
 
@@ -8751,13 +8757,25 @@
 
     move-result v14
 
-    .line 1994
     .local v14, "flagLen":I
+    const-string/jumbo v35, "wps_state="
+
+    invoke-virtual/range {v35 .. v35}, Ljava/lang/String;->length()I
+
+    move-result v35
+
+    .local v35, "wpsStateStrLength":I
+    const-string/jumbo v36, "wps_device_name="
+
+    invoke-virtual/range {v36 .. v36}, Ljava/lang/String;->length()I
+
+    move-result v36
+
+    .local v36, "wpsDeviceNameStrLength":I
     invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
 
     move-result-wide v22
 
-    .line 1996
     .local v22, "now":J
     move-object/from16 v10, v21
 
@@ -8775,7 +8793,7 @@
 
     move/from16 v1, v19
 
-    if-ge v0, v1, :cond_13
+    if-ge v0, v1, :cond_15
 
     aget-object v20, v10, v17
 
@@ -9186,7 +9204,7 @@
 
     move-result v29
 
-    if-eqz v29, :cond_6
+    if-eqz v29, :cond_13
 
     .line 2035
     :cond_e
@@ -9275,11 +9293,11 @@
 
     .line 2054
     :goto_8
-    move/from16 v0, v30
+    move/from16 v0, v33
 
     iput-boolean v0, v2, Landroid/net/wifi/ScanResult;->isWpsConfigured:Z
 
-    move/from16 v0, v31
+    move/from16 v0, v34
 
     iput-boolean v0, v2, Landroid/net/wifi/ScanResult;->isXiaomiRouter:Z
 
@@ -9309,9 +9327,9 @@
 
     const/4 v3, 0x0
 
-    const/16 v30, 0x0
+    const/16 v33, 0x0
 
-    const/16 v31, 0x0
+    const/16 v34, 0x0
 
     goto/16 :goto_5
 
@@ -9381,6 +9399,112 @@
     .restart local v22    # "now":J
     :cond_13
     :try_start_a
+    const-string/jumbo v37, "wps_state="
+
+    move-object/from16 v0, v20
+
+    move-object/from16 v1, v37
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+
+    move-result v37
+
+    if-eqz v37, :cond_14
+
+    new-instance v38, Ljava/lang/String;
+
+    invoke-virtual/range {v20 .. v20}, Ljava/lang/String;->getBytes()[B
+
+    move-result-object v37
+
+    invoke-virtual/range {v20 .. v20}, Ljava/lang/String;->length()I
+
+    move-result v39
+
+    sub-int v39, v39, v35
+
+    move-object/from16 v0, v38
+
+    move-object/from16 v1, v37
+
+    move-object/from16 v40, v3
+
+    move/from16 v2, v35
+
+    move/from16 v3, v39
+
+    invoke-direct {v0, v1, v2, v3}, Ljava/lang/String;-><init>([BII)V
+
+    .local v38, "wpsStateStr":Ljava/lang/String;
+    move-object/from16 v3, v40
+
+    const-string v37, "configured"
+
+    move-object/from16 v0, v37
+
+    move-object/from16 v1, v38
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v33
+
+    goto/16 :goto_5
+
+    .end local v38    # "wpsStateStr":Ljava/lang/String;
+    :cond_14
+    const-string/jumbo v37, "wps_device_name="
+
+    move-object/from16 v0, v20
+
+    move-object/from16 v1, v37
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+
+    move-result v37
+
+    if-eqz v37, :cond_6
+
+    new-instance v38, Ljava/lang/String;
+
+    invoke-virtual/range {v20 .. v20}, Ljava/lang/String;->getBytes()[B
+
+    move-result-object v37
+
+    invoke-virtual/range {v20 .. v20}, Ljava/lang/String;->length()I
+
+    move-result v39
+
+    sub-int v39, v39, v36
+
+    move-object/from16 v0, v38
+
+    move-object/from16 v1, v37
+
+    move-object/from16 v40, v3
+
+    move/from16 v2, v36
+
+    move/from16 v3, v39
+
+    invoke-direct {v0, v1, v2, v3}, Ljava/lang/String;-><init>([BII)V
+
+    .local v38, "wpsDeviceNameStr":Ljava/lang/String;
+    move-object/from16 v3, v40
+
+    const-string v37, "XiaoMiRouter"
+
+    move-object/from16 v0, v37
+
+    move-object/from16 v1, v38
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v34
+
+    goto/16 :goto_5
+
+    .end local v38    # "wpsDeviceNameStr":Ljava/lang/String;
+    :cond_15
     monitor-exit v30
     :try_end_a
     .catchall {:try_start_a .. :try_end_a} :catchall_0
@@ -10718,7 +10842,7 @@
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v1, "mSuspendOptNeedsDisabled "
+    const-string/jumbo v1, "mSuspendOptNeedsDisabled "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -11520,11 +11644,11 @@
 
     move-result v0
 
-    if-eqz v0, :cond_miui_0
+    if-eqz v0, :cond_0
 
     return-void
 
-    :cond_miui_0
+    :cond_0
     const v0, 0x20047
 
     const/4 v1, 0x0
