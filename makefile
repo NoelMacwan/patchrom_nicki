@@ -1,5 +1,6 @@
 #
-# Makefile for nexus5
+# Makefile for nicki 
+# ngedapuk onli
 #
 
 # The original zip file, MUST be specified by each product
