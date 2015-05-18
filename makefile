@@ -1,36 +1,34 @@
 #
 # Makefile for nicki 
-# ngedapuk onli
 #
+
+PORT_BUILD=/home/alfa/patchrom/build
+
+PORT_ROOT=/home/alfa/patchrom
 
 # The original zip file, MUST be specified by each product
 local-zip-file     := stockrom.zip
 
 # The output zip file of MIUI rom, the default is porting_miui.zip if not specified
-local-out-zip-file := MIUI_xmv6.zip
+local-out-zip-file := MIUI_V6_nicki.zip
 
 # the location for local-ota to save target-file
 local-previous-target-dir := 
 
 # All apps from original ZIP, but has smali files chanded
-local-modified-apps := 
+local-modified-apps :=  
 
-local-modified-jars :=
+local-modified-jars := 
 
 # All apks from MIUI
 local-miui-removed-apps := 
 
-local-miui-modified-apps := MiuiFramework
-
 local-miui-removed-priv-apps := 
 
-# Config density for co-developers to use the aaps with HDPI or XHDPI resource,
-# Default configrations are HDPI for ics branch and XHDPI for jellybean branch
-
-local-density := HDPI
+local-miui-modified-apps := MiuiFramework
 
 # All apps need to be removed from original ZIP file
-#local-remove-apps   
+#local-remove-apps   := 
 
 include phoneapps.mk
 
@@ -44,9 +42,9 @@ local-after-zip:= local-put-to-phone
 # The local targets after the zip file is generated, could include 'zip2sd' to 
 # deliver the zip file to phone, or to customize other actions
 
-PORT_PRODUCT：= nicki_zoldyck
-
 include $(PORT_BUILD)/porting.mk
+
+PORT_PRODUCT：= nicki
 
 # To define any local-target
 #updater := $(ZIP_DIR)/META-INF/com/google/android/updater-script
@@ -58,9 +56,7 @@ local-pre-zip-misc:
 	cp -rf other/system $(ZIP_DIR)/
 
 	@echo goodbye! miui prebuilt binaries!
-	cp -rf stockrom/system/bin/app_process $(ZIP_DIR)/system/bin/app_process
 	rm -rf $(ZIP_DIR)/system/bin/debuggerd_vendor
 	cp -rf stockrom/system/bin/debuggerd $(ZIP_DIR)/system/bin/debuggerd
 	rm -rf $(ZIP_DIR)/system/bin/dexopt_vendor
 	cp -rf stockrom/system/bin/dexopt $(ZIP_DIR)/system/bin/dexopt
-
