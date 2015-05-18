@@ -8505,8 +8505,7 @@
     .param p2, "flags"    # I
 
     .prologue
-    .line 4496
-	Lmiui/view/VolumePanel;->postVolumeChanged(II)V
+    iget-object v0, p0, Landroid/media/AudioService;->mVolumePanel:Lmiui/view/VolumePanel;
 
     if-eqz v0, :cond_0
 
