@@ -16593,6 +16593,7 @@
     .local v9, "hungUp":Z
     if-eqz v19, :cond_11
 
+    if-eqz p3, :cond_11
     .line 4715
     :try_start_1
     invoke-interface/range {v19 .. v19}, Lcom/android/internal/telephony/ITelephony;->endCall()Z
@@ -18353,7 +18354,7 @@
 
     const/16 v4, 0x7e1
 
-    if-ne v3, v4, :cond_3
+    if-ne v3, v4, :cond_miui_0
 
     move-object/from16 v0, p2
 
@@ -18361,18 +18362,18 @@
 
     and-int/lit16 v3, v3, 0x100
 
-    if-nez v3, :cond_4
+    if-nez v3, :cond_miui_1
 
-    :cond_3
+    :cond_miui_0
     move-object/from16 v0, p2
 
     iget v3, v0, Landroid/view/WindowManager$LayoutParams;->type:I
 
     const/4 v4, 0x3
 
-    if-ne v3, v4, :cond_5
+    if-ne v3, v4, :cond_miui_2
 
-    :cond_4
+    :cond_miui_1
     const/4 v3, 0x0
 
     iput v3, v14, Landroid/graphics/Rect;->top:I
@@ -18387,7 +18388,7 @@
 
     iput v3, v9, Landroid/graphics/Rect;->top:I
 
-    :cond_5
+    :cond_miui_2
     and-int/lit16 v3, v5, 0x200
 
     if-eqz v3, :cond_3
