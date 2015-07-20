@@ -51,7 +51,7 @@ PORT_PRODUCT：= nicki
 #pre_install_data_packages := $(TMP_DIR)/pre_install_apk_pkgname.txt
 local-pre-zip-misc:
 	@echo Update boot.img
-	cp other/boot.img $(ZIP_DIR)/boot.img
+	cp -rf other/boot.img $(ZIP_DIR)/boot.img
 
 	@echo goodbye! miui prebuilt binaries!
 	rm -rf $(ZIP_DIR)/system/bin/debuggerd_vendor
