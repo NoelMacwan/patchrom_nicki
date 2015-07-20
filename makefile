@@ -2,9 +2,9 @@
 # Makefile for nicki 
 #
 
-PORT_BUILD=/home/alfa/patchrom/build
+PORT_BUILD=/home/noelmacwan/patchrom/build
 
-PORT_ROOT=/home/alfa/patchrom
+PORT_ROOT=/home/noelmacwan/patchrom
 
 # The original zip file, MUST be specified by each product
 local-zip-file     := stockrom.zip
@@ -52,8 +52,6 @@ PORT_PRODUCT：= nicki
 local-pre-zip-misc:
 	@echo Update boot.img
 	cp other/boot.img $(ZIP_DIR)/boot.img
-
-	cp -rf other/system $(ZIP_DIR)/
 
 	@echo goodbye! miui prebuilt binaries!
 	rm -rf $(ZIP_DIR)/system/bin/debuggerd_vendor
